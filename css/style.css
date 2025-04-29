@@ -52,7 +52,7 @@ body {
     padding: 15px 0;
 }
 
-button {
+#profileDescription>#contact>#contactButton>a>button {
     background: #ffffff;
     border: 1px solid #ffffff;
     border-radius: 6px;
@@ -77,14 +77,14 @@ button {
     vertical-align: middle;
 }
 
-button:hover,
-button:active {
+#profileDescription>#contact>#contactButton>a>button:hover,
+#profileDescription>#contact>#contactButton>a>button:active {
     background-color: initial;
     background-position: 0 0;
     color: #ffffff;
 }
 
-button:active {
+#profileDescription>#contact>#contactButton>a>button:active {
     opacity: .5;
 }
 
