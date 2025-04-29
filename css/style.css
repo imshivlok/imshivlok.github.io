@@ -4,7 +4,7 @@
 }
 
 body {
-    background-color: #ff0000;
+    background-color: #000000;
     color: #758694;
 }
 
@@ -17,7 +17,7 @@ body {
     row-gap: 3vw;
 }
 
-.profile {
+#profile {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -33,16 +33,16 @@ body {
     border-radius: 50%;
 }
 
-#profileDescription > .name {
+#profileDescription > #name {
     font: min(5vw, 5vh)monospace;
     color: #ffffff;
 }
 
-#profileDescription > .designation {
+#profileDescription > #about {
     font: min(2vw, 2vh)monospace;
 }
 
-#profileDescription > .login > .loginButton {
+#profileDescription > #contact > #contactButton {
     padding: 15px 0;
 }
 
@@ -83,7 +83,7 @@ button:active {
 }
 
 @media (max-width: 768px) {
-    .profile {
+    #profile {
         flex-direction: column;
     }
 }
