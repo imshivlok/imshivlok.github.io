@@ -1,26 +1,627 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shivlok Sharma</title>
-    <link rel="stylesheet" href="static/css/style.css">
+    <meta name="description" content="Portfolio of Shivlok Sharma, a Web Developer from Lucknow.">
+    
+    <!-- Google Fonts: VT323 (Pixel/Terminal) & Space Mono (Tech) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=VT323&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        mono: ['"Space Mono"', 'monospace'],
+                        pixel: ['"VT323"', 'monospace'],
+                    },
+                    colors: {
+                        cyber: {
+                            black: '#050505',
+                            dark: '#0a0a0a',
+                            gray: '#1a1a1a',
+                            cyan: '#00f3ff', // The "Cold" vibe
+                            dim: 'rgba(0, 243, 255, 0.1)',
+                            accent: '#ffffff',
+                        }
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #1a1a1a 1px, transparent 1px), linear-gradient(to bottom, #1a1a1a 1px, transparent 1px)",
+                    },
+                    boxShadow: {
+                        'neon': '0 0 10px rgba(0, 243, 255, 0.5), 0 0 20px rgba(0, 243, 255, 0.3)',
+                        'hard': '6px 6px 0px 0px #00f3ff',
+                        'hard-gray': '6px 6px 0px 0px #333',
+                    },
+                    animation: {
+                        'glitch': 'glitch 1s linear infinite',
+                        'blink': 'blink 1s step-end infinite',
+                        'float-pixel': 'floatPixel 4s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        blink: {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0' },
+                        },
+                        floatPixel: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        glitch: {
+                            '2%, 64%': { transform: 'translate(2px,0) skew(0deg)' },
+                            '4%, 60%': { transform: 'translate(-2px,0) skew(0deg)' },
+                            '62%': { transform: 'translate(0,0) skew(5deg)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Global Reset */
+        body {
+            background-color: #050505;
+            cursor: crosshair; /* Tech vibe cursor */
+        }
+
+        /* CRT Scanline Effect */
+        body::after {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 100;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+
+        /* Selection Color */
+        ::selection {
+            background: #00f3ff;
+            color: #000;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333; 
+            border: 1px solid #00f3ff;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00f3ff; 
+        }
+
+        /* Glitch Text Effect Wrapper */
+        .glitch-wrapper {
+            position: relative;
+        }
+        .glitch-wrapper::before,
+        .glitch-wrapper::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .glitch-wrapper::before {
+            left: 2px;
+            text-shadow: -1px 0 #ff00c1;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+        .glitch-wrapper::after {
+            left: -2px;
+            text-shadow: -1px 0 #00fff9;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim2 5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(31px, 9999px, 94px, 0); }
+            4% { clip: rect(70px, 9999px, 14px, 0); }
+            8% { clip: rect(6px, 9999px, 86px, 0); }
+            12% { clip: rect(58px, 9999px, 3px, 0); }
+            16% { clip: rect(10px, 9999px, 96px, 0); }
+            20% { clip: rect(81px, 9999px, 20px, 0); }
+            100% { clip: rect(54px, 9999px, 45px, 0); }
+        }
+        @keyframes glitch-anim2 {
+            0% { clip: rect(49px, 9999px, 8px, 0); }
+            4% { clip: rect(87px, 9999px, 96px, 0); }
+            8% { clip: rect(18px, 9999px, 77px, 0); }
+            12% { clip: rect(44px, 9999px, 11px, 0); }
+            16% { clip: rect(69px, 9999px, 86px, 0); }
+            20% { clip: rect(3px, 9999px, 57px, 0); }
+            100% { clip: rect(20px, 9999px, 60px, 0); }
+        }
+
+        /* Tech Shape Pop-out */
+        .photo-wrapper {
+            position: relative;
+            height: 400px;
+            width: 350px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .tech-shape {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 80%;
+            background: linear-gradient(180deg, rgba(0, 243, 255, 0.1) 0%, rgba(0, 243, 255, 0.05) 100%);
+            border: 2px solid #00f3ff;
+            /* Geometric Tech Polygon */
+            clip-path: polygon(
+                0 0, 
+                20% 0, 
+                25% 10%, 
+                75% 10%, 
+                80% 0, 
+                100% 0, 
+                100% 85%, 
+                85% 100%, 
+                15% 100%, 
+                0 85%
+            );
+            z-index: 1;
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .photo-wrapper:hover .tech-shape {
+            background: rgba(0, 243, 255, 0.15);
+            transform: scale(1.02);
+            box-shadow: 0 0 50px rgba(0, 243, 255, 0.4);
+        }
+
+        /* Background Grid */
+        .tech-grid {
+            background-size: 30px 30px;
+            background-image:
+                linear-gradient(to right, rgba(0, 243, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 243, 255, 0.05) 1px, transparent 1px);
+        }
+
+        .person-img {
+            position: absolute;
+            bottom: 0;
+            z-index: 2;
+            height: 105%;
+            width: auto;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(1.2) drop-shadow(4px 4px 0px rgba(0, 243, 255, 0.5));
+            transition: all 0.3s ease;
+            /* Pixelated edges for image */
+            image-rendering: pixelated; 
+        }
+
+        .photo-wrapper:hover .person-img {
+            filter: grayscale(0%) contrast(1.1) drop-shadow(6px 6px 0px rgba(0, 243, 255, 0.8));
+            transform: translateY(-5px);
+        }
+
+    </style>
 </head>
-<body>
-    <header>
-        <nav class="navbar">
-            <a href="index.html" class="nav-brand">Shivlok Sharma</a>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <span>hi</span>
-    </main>
-    <script src="static/js/script.js"></script>
+<body class="bg-cyber-black text-slate-300 font-mono overflow-x-hidden tech-grid">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-cyber-black/90 border-b border-cyber-cyan/30 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center group cursor-pointer">
+                    <span class="text-cyber-cyan text-2xl font-pixel animate-pulse">>_</span>
+                    <a href="#" class="font-pixel text-3xl text-white ml-2 tracking-widest group-hover:text-cyber-cyan transition-colors">
+                        SHIVLOK<span class="text-cyber-cyan">.SHARMA</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#home" class="text-sm uppercase tracking-widest hover:text-cyber-cyan hover:underline decoration-2 underline-offset-4 transition-all">Home</a>
+                    <a href="#projects" class="text-sm uppercase tracking-widest hover:text-cyber-cyan hover:underline decoration-2 underline-offset-4 transition-all">Projects</a>
+                    <a href="#about" class="text-sm uppercase tracking-widest hover:text-cyber-cyan hover:underline decoration-2 underline-offset-4 transition-all">Database</a>
+                    <a href="#contact" class="px-6 py-2 border border-cyber-cyan text-cyber-cyan hover:bg-cyber-cyan hover:text-black font-bold uppercase text-sm transition-all shadow-[0_0_10px_rgba(0,243,255,0.2)] hover:shadow-[0_0_20px_rgba(0,243,255,0.6)] rounded-none">
+                        CONTACT
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="flex md:hidden">
+                    <button id="menu-btn" class="text-cyber-cyan hover:text-white p-2 border border-cyber-cyan/30 bg-cyber-dark/50 rounded-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation Slide-in -->
+    <div id="mobile-menu" class="fixed inset-y-0 right-0 w-72 bg-cyber-black border-l-2 border-cyber-cyan z-50 transform translate-x-full transition-transform duration-200 ease-linear flex flex-col pt-24 px-6 space-y-8 shadow-[0_0_50px_rgba(0,243,255,0.1)]">
+        
+        <!-- Decorative Grid Background in Menu -->
+        <div class="absolute inset-0 tech-grid opacity-20 pointer-events-none z-0"></div>
+
+        <button id="close-menu" class="absolute top-6 right-6 text-cyber-cyan hover:text-white border border-cyber-cyan/30 p-1 rounded-none bg-cyber-dark z-10">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+        
+        <div class="relative z-10 flex flex-col space-y-6">
+            <div class="border-b border-cyber-gray pb-2 mb-4">
+                <span class="text-xs text-cyber-cyan uppercase tracking-widest">System Navigation</span>
+            </div>
+            <a href="#home" class="text-2xl font-pixel text-white hover:text-cyber-cyan hover:translate-x-2 transition-transform block mobile-link">> HOME</a>
+            <a href="#projects" class="text-2xl font-pixel text-white hover:text-cyber-cyan hover:translate-x-2 transition-transform block mobile-link">> PROJECTS</a>
+            <a href="#about" class="text-2xl font-pixel text-white hover:text-cyber-cyan hover:translate-x-2 transition-transform block mobile-link">> DATABASE</a>
+            <a href="#contact" class="text-2xl font-pixel text-cyber-cyan block mobile-link animate-pulse">> CONTACT_ME_</a>
+        </div>
+
+        <div class="mt-auto mb-8 border-t border-cyber-gray pt-6 z-10">
+            <p class="text-xs text-slate-500 font-mono">STATUS: <span class="text-green-500">ONLINE</span></p>
+            <p class="text-xs text-slate-500 font-mono">LOC: LUCKNOW_IN</p>
+        </div>
+    </div>
+    
+    <div id="menu-overlay" class="fixed inset-0 bg-cyber-black/80 z-40 hidden backdrop-blur-[2px]"></div>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen pt-20 flex items-center relative overflow-hidden">
+        
+        <!-- Decoration: Code Rain / Elements -->
+        <div class="absolute top-1/4 left-10 opacity-20 hidden lg:block">
+            <div class="font-mono text-xs text-cyber-cyan">
+                <div>const dev = {</div>
+                <div class="pl-4">name: "Shivlok",</div>
+                <div class="pl-4">age: 18,</div>
+                <div class="pl-4">loc: "Lucknow"</div>
+                <div>};</div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid md:grid-cols-2 gap-12 items-center relative z-10">
+            
+            <!-- Text Content -->
+            <div class="order-2 md:order-1 text-center md:text-left space-y-6">
+                <div class="inline-flex items-center px-2 py-1 bg-cyber-gray border border-cyber-cyan/50 text-cyber-cyan text-xs font-mono tracking-widest uppercase mb-2">
+                    <span class="w-2 h-2 bg-green-500 mr-2 animate-pulse"></span>
+                    Open to Work
+                </div>
+                
+                <h1 class="text-5xl md:text-7xl font-pixel text-white leading-none tracking-tight">
+                    BUILDING THE <br>
+                    <span class="glitch-wrapper text-cyber-cyan" data-text="DIGITAL_FUTURE">DIGITAL_FUTURE</span>
+                </h1>
+                
+                <p class="text-lg text-slate-400 max-w-lg mx-auto md:mx-0 font-mono border-l-2 border-cyber-cyan pl-4">
+                    // Hello_World. I'm <strong class="text-white">Shivlok Sharma</strong>.<br>
+                    // 18yo Web Architect from Lucknow.<br>
+                    // Crafting pixel-perfect cyber experiences.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-6">
+                    <a href="#projects" class="group px-8 py-3 bg-cyber-cyan text-black font-bold font-pixel text-xl hover:bg-white transition-colors shadow-neon relative overflow-hidden">
+                        <span class="relative z-10">VIEW_PROJECTS</span>
+                    </a>
+                    <a href="#contact" class="px-8 py-3 border border-slate-600 text-slate-300 font-pixel text-xl hover:border-cyber-cyan hover:text-cyber-cyan transition-colors bg-cyber-dark hover:bg-cyber-gray/50">
+                        CONTACT_ME
+                    </a>
+                </div>
+            </div>
+
+            <!-- Hero Image / Tech Pop-out -->
+            <div class="order-1 md:order-2 flex justify-center items-end relative h-full min-h-[400px]">
+                <div class="photo-wrapper">
+                    <!-- The Tech Polygon Shape -->
+                    <div class="tech-shape">
+                        <!-- Inner Grid Lines for shape -->
+                        <div class="absolute inset-0 bg-[linear-gradient(rgba(0,243,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(0,243,255,0.1)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
+                    </div>
+                    
+                    <!-- 
+                        REPLACE 'src' below with your actual transparent PNG.
+                        Added a slight grayscale filter in CSS to match the 'cold' vibe.
+                    -->
+                    <img src="images/shivlok.png" 
+                         alt="Shivlok Sharma" 
+                         class="person-img"
+                         onerror="this.src='https://illustrations.popsy.co/amber/surr-getting-things-done.svg'; this.style.height='80%'; this.style.bottom='20px'; this.style.filter='grayscale(100%) drop-shadow(4px 4px 0 #00f3ff)';"
+                         >
+                </div>
+                
+                <!-- Floating Elements decoration -->
+                <div class="absolute top-10 right-0 p-2 bg-cyber-black border border-cyber-cyan text-xs font-mono text-cyber-cyan animate-float-pixel shadow-hard">
+                    SPEED: 100%
+                </div>
+                <div class="absolute bottom-20 left-0 p-2 bg-cyber-black border border-cyber-gray text-xs font-mono text-white animate-float-pixel shadow-hard-gray" style="animation-delay: 2s;">
+                    &lt;DEV_MODE&gt;
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 bg-cyber-dark relative border-t border-cyber-gray">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-end justify-between mb-16 border-b border-cyber-gray pb-4">
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-pixel text-white mb-2">PROJECTS<span class="animate-blink text-cyber-cyan">_</span></h2>
+                    <p class="text-cyber-cyan font-mono text-sm">// EXECUTED_CONTRACTS</p>
+                </div>
+                <div class="hidden md:block font-mono text-xs text-slate-500">
+                    DIR: /home/shivlok/work
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Project 1: Seezium Technologies -->
+                <div class="group bg-cyber-black border border-cyber-gray hover:border-cyber-cyan transition-all duration-300 relative">
+                    <!-- Card Header UI -->
+                    <div class="h-8 bg-cyber-gray flex items-center px-2 justify-between border-b border-cyber-gray group-hover:bg-cyber-cyan group-hover:text-black transition-colors">
+                        <span class="text-xs font-mono">seezium.exe</span>
+                        <div class="flex space-x-1">
+                            <div class="w-2 h-2 bg-slate-500 rounded-none"></div>
+                            <div class="w-2 h-2 bg-slate-500 rounded-none"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="h-48 bg-cyber-dark relative overflow-hidden flex items-center justify-center border-b border-cyber-gray group-hover:border-cyber-cyan">
+                        <!-- Grid overlay -->
+                        <div class="absolute inset-0 bg-[linear-gradient(45deg,rgba(0,0,0,0)_49%,rgba(0,243,255,0.1)_50%,rgba(0,0,0,0)_51%)] bg-[size:10px_10px]"></div>
+                        <span class="text-5xl font-pixel text-slate-700 group-hover:text-white transition-colors z-10">SEEZIUM</span>
+                    </div>
+                    
+                    <div class="p-6">
+                        <h3 class="text-2xl font-pixel text-white mb-2 group-hover:text-cyber-cyan">Seezium Technologies</h3>
+                        <p class="text-slate-400 text-sm font-mono mb-4 border-l border-cyber-gray pl-2">
+                            Digital solutions startup. Optimized core landing infrastructure for maximum throughput.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4 font-mono text-xs">
+                            <span class="px-2 py-1 bg-cyber-gray text-cyber-cyan border border-cyber-cyan/30">STARTUP</span>
+                            <span class="px-2 py-1 bg-cyber-gray text-cyber-cyan border border-cyber-cyan/30">WEB</span>
+                        </div>
+                        <a href="#" class="inline-flex items-center text-sm font-bold font-pixel text-white hover:text-cyber-cyan uppercase tracking-widest">
+                            [ ACCESS_FILE ]
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2: KopyKitaab -->
+                <div class="group bg-cyber-black border border-cyber-gray hover:border-purple-500 transition-all duration-300 relative">
+                    <div class="h-8 bg-cyber-gray flex items-center px-2 justify-between border-b border-cyber-gray group-hover:bg-purple-600 group-hover:text-white transition-colors">
+                        <span class="text-xs font-mono">kk_platform.react</span>
+                        <div class="flex space-x-1">
+                            <div class="w-2 h-2 bg-slate-500 rounded-none"></div>
+                            <div class="w-2 h-2 bg-slate-500 rounded-none"></div>
+                        </div>
+                    </div>
+
+                    <div class="h-48 bg-cyber-dark relative overflow-hidden flex items-center justify-center border-b border-cyber-gray group-hover:border-purple-500">
+                        <div class="absolute inset-0 bg-[linear-gradient(45deg,rgba(0,0,0,0)_49%,rgba(168,85,247,0.1)_50%,rgba(0,0,0,0)_51%)] bg-[size:10px_10px]"></div>
+                        <span class="text-5xl font-pixel text-slate-700 group-hover:text-white transition-colors z-10">KK</span>
+                    </div>
+
+                    <div class="p-6">
+                        <h3 class="text-2xl font-pixel text-white mb-2 group-hover:text-purple-400">KopyKitaab</h3>
+                        <p class="text-slate-400 text-sm font-mono mb-4 border-l border-cyber-gray pl-2">
+                            EdTech resource platform. Engineered React UI components for student data visualization.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4 font-mono text-xs">
+                            <span class="px-2 py-1 bg-cyber-gray text-purple-400 border border-purple-500/30">EDTECH</span>
+                            <span class="px-2 py-1 bg-cyber-gray text-purple-400 border border-purple-500/30">REACT</span>
+                        </div>
+                        <a href="#" class="inline-flex items-center text-sm font-bold font-pixel text-white hover:text-purple-400 uppercase tracking-widest">
+                            [ ACCESS_FILE ]
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 3: Hotel Leaf -->
+                <div class="group bg-cyber-black border border-cyber-gray hover:border-emerald-500 transition-all duration-300 relative">
+                    <div class="h-8 bg-cyber-gray flex items-center px-2 justify-between border-b border-cyber-gray group-hover:bg-emerald-600 group-hover:text-black transition-colors">
+                        <span class="text-xs font-mono">leaf_hotel.sys</span>
+                        <div class="flex space-x-1">
+                            <div class="w-2 h-2 bg-slate-500 rounded-none"></div>
+                            <div class="w-2 h-2 bg-slate-500 rounded-none"></div>
+                        </div>
+                    </div>
+
+                    <div class="h-48 bg-cyber-dark relative overflow-hidden flex items-center justify-center border-b border-cyber-gray group-hover:border-emerald-500">
+                        <div class="absolute inset-0 bg-[linear-gradient(45deg,rgba(0,0,0,0)_49%,rgba(16,185,129,0.1)_50%,rgba(0,0,0,0)_51%)] bg-[size:10px_10px]"></div>
+                        <span class="text-5xl font-pixel text-slate-700 group-hover:text-white transition-colors z-10">LEAF</span>
+                    </div>
+
+                    <div class="p-6">
+                        <h3 class="text-2xl font-pixel text-white mb-2 group-hover:text-emerald-400">Hotel Leaf</h3>
+                        <p class="text-slate-400 text-sm font-mono mb-4 border-l border-cyber-gray pl-2">
+                            Hospitality management system. Implemented booking algorithms and gallery interfaces.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4 font-mono text-xs">
+                            <span class="px-2 py-1 bg-cyber-gray text-emerald-400 border border-emerald-500/30">HOSPITALITY</span>
+                            <span class="px-2 py-1 bg-cyber-gray text-emerald-400 border border-emerald-500/30">UI/UX</span>
+                        </div>
+                        <a href="#" class="inline-flex items-center text-sm font-bold font-pixel text-white hover:text-emerald-400 uppercase tracking-widest">
+                            [ ACCESS_FILE ]
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- About / Skills Section -->
+    <section id="about" class="py-24 relative overflow-hidden border-t border-cyber-gray bg-cyber-black">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="relative border border-cyber-cyan/30 p-1">
+                <!-- Decorative Corners -->
+                <div class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-cyber-cyan"></div>
+                <div class="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-cyber-cyan"></div>
+                <div class="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-cyber-cyan"></div>
+                <div class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-cyber-cyan"></div>
+
+                <div class="bg-cyber-dark/80 p-8 md:p-12 relative overflow-hidden">
+                    <!-- Background Scanner Line -->
+                    <div class="absolute top-0 left-0 w-full h-1 bg-cyber-cyan/20 animate-float-pixel" style="animation-duration: 3s"></div>
+
+                    <div class="grid md:grid-cols-2 gap-10 items-center relative z-10">
+                        <div>
+                            <h2 class="text-4xl font-pixel text-white mb-6">USER_PROFILE<span class="text-cyber-cyan">.DAT</span></h2>
+                            <div class="font-mono text-sm text-slate-300 space-y-4 leading-relaxed">
+                                <p>
+                                    <span class="text-cyber-cyan">>></span> Identity: 18-year-old developer based in <span class="bg-cyber-gray px-1 text-white">Lucknow, IN</span>.
+                                </p>
+                                <p>
+                                    <span class="text-cyber-cyan">>></span> Mission: Decoding complex problems and recompiling them into sleek, functional web applications.
+                                </p>
+                                <p>
+                                    <span class="text-cyber-cyan">>></span> Exp: Collaborated with entities like <span class="text-white">Seezium Technologies</span> and <span class="text-white">KopyKitaab</span>.
+                                </p>
+                            </div>
+                            
+                            <div class="flex space-x-4 mt-8">
+                                <!-- Social Links -->
+                                <a href="#" class="text-slate-500 hover:text-cyber-cyan transition-colors border border-slate-700 hover:border-cyber-cyan p-2">
+                                    <span class="sr-only">GitHub</span>
+                                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/></svg>
+                                </a>
+                                <a href="#" class="text-slate-500 hover:text-cyber-cyan transition-colors border border-slate-700 hover:border-cyber-cyan p-2">
+                                    <span class="sr-only">LinkedIn</span>
+                                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Skills / Stats -->
+                        <div>
+                            <h3 class="font-mono text-xs text-cyber-cyan uppercase mb-4 tracking-widest border-b border-cyber-gray pb-2">Skill_Matrix</h3>
+                            <div class="space-y-4">
+                                <!-- HTML -->
+                                <div>
+                                    <div class="flex justify-between text-xs font-mono text-slate-400 mb-1">
+                                        <span>HTML/CSS</span>
+                                        <span>98%</span>
+                                    </div>
+                                    <div class="h-2 bg-cyber-gray w-full">
+                                        <div class="h-full bg-cyber-cyan shadow-[0_0_10px_#00f3ff] w-[98%]"></div>
+                                    </div>
+                                </div>
+                                <!-- JS -->
+                                <div>
+                                    <div class="flex justify-between text-xs font-mono text-slate-400 mb-1">
+                                        <span>JAVASCRIPT</span>
+                                        <span>90%</span>
+                                    </div>
+                                    <div class="h-2 bg-cyber-gray w-full">
+                                        <div class="h-full bg-purple-500 shadow-[0_0_10px_#a855f7] w-[90%]"></div>
+                                    </div>
+                                </div>
+                                <!-- React -->
+                                <div>
+                                    <div class="flex justify-between text-xs font-mono text-slate-400 mb-1">
+                                        <span>REACT</span>
+                                        <span>85%</span>
+                                    </div>
+                                    <div class="h-2 bg-cyber-gray w-full">
+                                        <div class="h-full bg-emerald-500 shadow-[0_0_10px_#10b981] w-[85%]"></div>
+                                    </div>
+                                </div>
+                                <!-- Design -->
+                                <div>
+                                    <div class="flex justify-between text-xs font-mono text-slate-400 mb-1">
+                                        <span>UI_DESIGN</span>
+                                        <span>88%</span>
+                                    </div>
+                                    <div class="h-2 bg-cyber-gray w-full">
+                                        <div class="h-full bg-white shadow-[0_0_10px_#ffffff] w-[88%]"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-cyber-dark border-t border-cyber-gray">
+        <div class="max-w-xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-pixel text-white mb-6">ESTABLISH_UPLINK<span class="animate-blink">_</span></h2>
+            <div class="bg-black border border-cyber-gray p-6 font-mono text-left mb-8 shadow-hard-gray">
+                <p class="text-slate-400 mb-2">> Incoming transmission...</p>
+                <p class="text-slate-400 mb-2">> Origin: Interested Party</p>
+                <p class="text-slate-400 mb-4">> Message: "Let's build something crazy in Lucknow."</p>
+                <p class="text-cyber-cyan animate-pulse">>> Awaiting response...</p>
+            </div>
+            
+            <a href="mailto:contact@shivlok.dev" class="inline-flex items-center justify-center px-10 py-4 text-xl font-bold font-pixel text-black bg-cyber-cyan hover:bg-white hover:shadow-neon transition-all uppercase tracking-widest shadow-hard">
+                SEND AN EMAIL
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-cyber-gray py-8 bg-cyber-black">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-xs font-mono text-slate-600">
+            <p>&copy; 2024 SHIVLOK SHARMA. SYSTEM SECURE.</p>
+            <p class="mt-2 md:mt-0 uppercase">Lucknow Node // Online</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Mobile Menu -->
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const closeBtn = document.getElementById('close-menu');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuOverlay = document.getElementById('menu-overlay');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        function openMenu() {
+            mobileMenu.classList.remove('translate-x-full');
+            mobileMenu.classList.add('translate-x-0');
+            menuOverlay.classList.remove('hidden');
+        }
+
+        function closeMenu() {
+            mobileMenu.classList.remove('translate-x-0');
+            mobileMenu.classList.add('translate-x-full');
+            menuOverlay.classList.add('hidden');
+        }
+
+        menuBtn.addEventListener('click', openMenu);
+        closeBtn.addEventListener('click', closeMenu);
+        menuOverlay.addEventListener('click', closeMenu);
+
+        // Close menu when a link is clicked
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+    </script>
 </body>
 </html>
